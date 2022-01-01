@@ -1,7 +1,7 @@
 {
-    "name": "Template",
+    "name": "raw",
     "version": "1.0.0",
-    "description": "PC Plugin Template",
-    "author": "y/n",
+    "description": "A plugin to send messages raw!",
+    "author": "Captain#3175 (347366054806159360)",
     "license": "DBAD"
 }
