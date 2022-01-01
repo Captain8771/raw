@@ -1,6 +1,6 @@
 const { Plugin } = require('powercord/entities');
 const { inject, uninject } = require("powercord/injector");
-const { messages, React } = require('powercord/webpack');
+const { messages } = require('powercord/webpack');
 
 module.exports = class Raw extends Plugin {
     toggled
@@ -55,7 +55,6 @@ module.exports = class Raw extends Plugin {
         })
 
     inject("toggleraw", messages, 'sendMessage', (args) => {
-      console.log(powercord.api.settings)
       if (!this.toggled) return args
       args[1].content = this.rawify(args[1].content)
       return args;
