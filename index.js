@@ -12,6 +12,7 @@ module.exports = class Raw extends Plugin {
       raw = raw.replaceAll(">", "\\>")
       raw = raw.replaceAll("~", "\\~")
       raw = raw.replaceAll("`", "\\`")
+      raw = raw.replaceAll(":", "\\:")
       return raw
     }
     startPlugin() {
