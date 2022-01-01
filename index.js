@@ -1,6 +1,6 @@
 const { Plugin } = require('powercord/entities');
 const { inject, uninject } = require("powercord/injector");
-const { messages } = require('powercord/webpack');
+const { messages, React } = require('powercord/webpack');
 
 module.exports = class Raw extends Plugin {
     toggled
@@ -16,7 +16,9 @@ module.exports = class Raw extends Plugin {
       return raw
     }
     startPlugin() {
-        this.toggled = false
+
+        this.toggled = this.settings.get("toggled", false)
+
         powercord.api.commands.registerCommand({
           command: "raw",
           description: "Sends the input, without markdown",
@@ -42,6 +44,7 @@ module.exports = class Raw extends Plugin {
           usage: "{c}",
           executor: (args) => {
             this.toggled = !this.toggled
+            this.settings.set("toggled", this.toggled)
             return {
               send: false,
               result: this.toggled
@@ -52,10 +55,12 @@ module.exports = class Raw extends Plugin {
         })
 
     inject("toggleraw", messages, 'sendMessage', (args) => {
+      console.log(powercord.api.settings)
       if (!this.toggled) return args
       args[1].content = this.rawify(args[1].content)
       return args;
     }, true);
+
   }
     pluginWillUnload() {
         powercord.api.commands.unregisterCommand("raw");
